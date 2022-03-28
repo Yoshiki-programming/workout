@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block main %}
+{% load tag_library %}
+{% if user.username %}
+    {{ user.username }} HELLO, Welocom to this app!<br>
+{% else %}
+    {{ user }}さん、こんにちは!<br>
+{% endif %}
+{% if object_list %}
+    {% for app in object_list %}
+        <button><a href="">{{ app.workout }}</a></button><br>
+    {% empty %}
+        <p>the list is empty.</p>
+    {% endfor %}
+{% else %}
+    <p>No workout.</p>
+{% endif %}
+
+
+<p><a href="{% url 'logout' %}">ログアウト</a></p>
+<p><a href="{% url 'password_change' %}">パスワードの変更</a></p>
+{% endblock %}

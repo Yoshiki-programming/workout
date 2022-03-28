@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -125,3 +126,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'workout_app.User'
+
+LOGIN_URL = "/login/"
+LOGOUT_REDIRECT_URL = "/login/"
+LOGIN_REDIRECT_URL = 'workout_app:mypage'

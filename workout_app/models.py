@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+ 
 
 class User(AbstractUser):
     heights = models.FloatField(
@@ -26,18 +27,15 @@ class Workout(models.Model):
         max_length=20
         )
     workout = models.TextField(
-        verbose_name="ワークアウト",
+        verbose_name="ワークアウト名",
         )
     memo = models.TextField(
         verbose_name="メモ",
         blank=True,
         null=True,
         )
-    date = models.DateField(
-        verbose_name="日付",
-        )
 
-class Weight(models.Model):
+class WorkoutDetail(models.Model):
     workout = models.ForeignKey(
         Workout,
         verbose_name="ワークアウト",
@@ -48,23 +46,18 @@ class Weight(models.Model):
         blank=True,
         null=True,
         )
-
-class Sets(models.Model):
-    workout = models.ForeignKey(
-        Workout,
-        verbose_name="ワークアウト",
-        on_delete=models.CASCADE,
-        )
-    sets = models.IntegerField(
-        verbose_name="セット数"
-        )
-
-class Reps(models.Model):
-    sets = models.ForeignKey(
-        Sets,
-        verbose_name="セット数",
-        on_delete=models.CASCADE,
-        )
     reps = models.IntegerField(
-        verbose_name="回数"
+        verbose_name="回数",
+        blank=True,
+        null=True,
+        )
+    date = models.DateField(
+        verbose_name="日付",
+        blank=True,
+        null=True,
+        )
+    memo = models.TextField(
+        verbose_name="メモ",
+        blank=True,
+        null=True,
         )
