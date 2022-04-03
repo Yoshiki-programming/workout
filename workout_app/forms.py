@@ -25,33 +25,33 @@ class SignUpForm(UserCreationForm):
     #     login(self.request, user)
     #     return response
 
-class WorkoutForm(forms.ModelForm):
-    success_url = reverse_lazy('workout_app:logined') 
-    class Meta:
-        model = Workout
-        fields = ("part_of_body", "workout", "memo")
+# class WorkoutForm(forms.ModelForm):
+#     success_url = reverse_lazy('workout_app:logined') 
+#     class Meta:
+#         model = Workout
+#         fields = ("part_of_body", "workout", "memo")
 
-class WorkoutDetailForm(forms.ModelForm):
-    success_url = reverse_lazy('workout_app:logined') 
-    class Meta:
-        model = WorkoutDetail
-        fields = ("workout","weight", "reps", "date", "memo")
+# class WorkoutRecordForm(forms.ModelForm):
+#     success_url = reverse_lazy('workout_app:logined') 
+#     class Meta:
+#         model = WorkoutDetail
+#         fields = ("workout","weight", "reps", "date", "memo")
 
-    def __init__(self, *args, **kwargs):
-        super(WorkoutDetailForm, self).__init__(*args, **kwargs)
+#     def __init__(self, *args, **kwargs):
+#         super(WorkoutRecordForm, self).__init__(*args, **kwargs)
 
-        self.fields['workout'].choices = lambda: [('', '-- 商品 --')] + [
-            (item.id, '円') for item in Workout.objects.order_by('user')
-            ]
+#         self.fields['workout'].choices = lambda: [('', '-- 商品 --')] + [
+#             (item.id, '円') for item in Workout.objects.order_by('user')
+#             ]
 
-        choices_number = [('', '-- 個数 --')] + [(str(i), str(i)) for i in range(1, 10)]
-        self.fields['reps'].widget = Select(choices=choices_number)
+#         choices_number = [('', '-- 個数 --')] + [(str(i), str(i)) for i in range(1, 10)]
+#         self.fields['reps'].widget = Select(choices=choices_number)
 
-WorkoutDetailFormSet = inlineformset_factory(
-    parent_model=Workout,
-    model=WorkoutDetail,
-    form=WorkoutDetailForm,
-    extra=1,
-    min_num=1,
-    validate_min=True,
-)
+# WorkoutDetailFormSet = inlineformset_factory(
+#     parent_model=Workout,
+#     model=WorkoutDetail,
+#     form=WorkoutRecordForm,
+#     extra=1,
+#     min_num=1,
+#     validate_min=True,
+# )

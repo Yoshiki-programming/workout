@@ -1,4 +1,9 @@
-{% extends "base.html" %}
-{% block main %}
-{% include "_form.html" %}
-{% endblock %}
+<form method="POST" id="form">
+    {% csrf_token %}
+    {{ form.management_form }}
+    <div class="text">
+        {{ form.empty_form.as_p }}
+    </div>
+    <button type="button" id="btn-clone">clone</button>
+    <button type="submit">submit</button>
+</form>
