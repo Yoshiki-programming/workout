@@ -1,3 +1,4 @@
+from asyncore import read
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from workout_app.models import WorkoutDetail, Workout
@@ -27,7 +28,7 @@ class WorkoutSerializer(serializers.ModelSerializer):
 
 # 子モデル
 class WorkoutDetailSerializer(serializers.ModelSerializer):
-    workout = WorkoutSerializer()
+    workout = WorkoutSerializer(read_only=True)
     class Meta:
         model = WorkoutDetail
         fields = [
@@ -37,4 +38,18 @@ class WorkoutDetailSerializer(serializers.ModelSerializer):
             "date",
             "memo"
         ]
+
+class MypageSerializer(serializers.ModelSerializer):
+    workout = WorkoutSerializer()
+    class Meta:
+        model = WorkoutDetail
+        fields = [
+            "workout",
+            "weight",
+            "reps",
+            "date",
+            "memo",
+        ]
+
+
 

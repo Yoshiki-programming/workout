@@ -129,4 +129,4 @@ AUTH_USER_MODEL = 'workout_app.User'
 
 LOGIN_URL = "/login/"
 LOGOUT_REDIRECT_URL = "/login/"
-LOGIN_REDIRECT_URL = 'workout_app:mypage'
+LOGIN_REDIRECT_URL = '/API/mypage/'
