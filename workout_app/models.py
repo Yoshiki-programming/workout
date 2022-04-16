@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.contrib.auth import get_user_model
  
 
 class User(AbstractUser):
@@ -19,8 +20,8 @@ class User(AbstractUser):
 class Workout(models.Model):
     user = models.ForeignKey(
         User,
+        get_user_model(),
         verbose_name="ユーザー名",
-        on_delete=models.CASCADE,
         )
     part_of_body = models.CharField(
         verbose_name="部位",

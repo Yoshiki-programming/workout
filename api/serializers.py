@@ -14,9 +14,9 @@ class UserSerializer(serializers.ModelSerializer):
             "heights",
             "weights",
         ]
-
+# ワークアウトを追加するためのシリアライザー
 class WorkoutSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
+    user = UserSerializer(read_only=True)
     class Meta:
         model = Workout
         fields = [
@@ -28,7 +28,7 @@ class WorkoutSerializer(serializers.ModelSerializer):
 
 # 子モデル
 class WorkoutDetailSerializer(serializers.ModelSerializer):
-    workout = WorkoutSerializer(read_only=True)
+    workout = WorkoutSerializer()
     class Meta:
         model = WorkoutDetail
         fields = [
@@ -38,18 +38,5 @@ class WorkoutDetailSerializer(serializers.ModelSerializer):
             "date",
             "memo"
         ]
-
-class MypageSerializer(serializers.ModelSerializer):
-    workout = WorkoutSerializer()
-    class Meta:
-        model = WorkoutDetail
-        fields = [
-            "workout",
-            "weight",
-            "reps",
-            "date",
-            "memo",
-        ]
-
 
 

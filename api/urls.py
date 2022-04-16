@@ -1,14 +1,12 @@
 from . import views
 from django.urls import path, include
-from rest_framework import routers
 from django.contrib.auth.decorators import login_required
+from rest_framework.urlpatterns import format_suffix_patterns
 app_name = "api"
 
-router = routers.DefaultRouter()
-router.register(r'workout', views.WorkoutCreateViewSet, basename="workout")
-router.register(r'mypage', views.MyPageViewSet, basename="mypage")
-router.register(r'record', views.MyPageViewSet, basename="record")
-
 urlpatterns = [
-    path('', include(router.urls)),
+    path('workout/', views.WorkoutList.as_view()),
+    path('workout/record/<int:pk>/', views.Recordlist.as_view()),
 ]
+
+urlpatterns = format_suffix_patterns(urlpatterns)
