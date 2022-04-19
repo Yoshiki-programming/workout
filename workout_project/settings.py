@@ -103,6 +103,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+REST_FRAMEWORK = { # 後ほど設定が必要になる
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ]
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
@@ -129,4 +134,4 @@ AUTH_USER_MODEL = 'workout_app.User'
 
 LOGIN_URL = "/login/"
 LOGOUT_REDIRECT_URL = "/login/"
-LOGIN_REDIRECT_URL = '/API/mypage/'
+LOGIN_REDIRECT_URL = '/API/workout-records/'

@@ -16,6 +16,8 @@ class User(AbstractUser):
         null=True,
         default=0
         )
+    def __str__(self):
+        return self.username
 
 class Workout(models.Model):
     user = models.ForeignKey(
@@ -35,6 +37,8 @@ class Workout(models.Model):
         blank=True,
         null=True,
         )
+    def __str__(self):
+        return '%s: %s' % (self.part_of_body, self.workout)
 
 class WorkoutDetail(models.Model):
     workout = models.ForeignKey(
@@ -62,3 +66,6 @@ class WorkoutDetail(models.Model):
         blank=True,
         null=True,
         )
+
+    def __str__(self):
+        return '%s: %s kg' % (self.workout, self.weight)
