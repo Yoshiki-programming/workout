@@ -1,4 +1,4 @@
-from django.views.generic import CreateView, UpdateView, DetailView
+from django.views.generic import CreateView, UpdateView, DetailView, TemplateView
 from .forms import SignUpForm, UserUpdateForm
 from django.views import generic
 from django.urls import reverse_lazy
@@ -19,7 +19,6 @@ class OnlyYouMixin(UserPassesTestMixin):
         user = self.request.user
         return user.pk == self.kwargs['pk'] or user.is_superuser
 
-
 class UserDetail(OnlyYouMixin, DetailView):
     model = User
     template_name = 'user_detail.html'
@@ -30,4 +29,7 @@ class UserUpdate(OnlyYouMixin, UpdateView):
     template_name = 'user_update_form.html'
     def get_success_url(self):
         return resolve_url('workout_app:user_detail', pk=self.kwargs['pk'])
+
+class MypageView(TemplateView):
+    template_name = 'index.html'
     

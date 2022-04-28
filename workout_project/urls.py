@@ -20,6 +20,5 @@ urlpatterns = [
     path("workout_app/", include("workout_app.urls")),
     path('', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
-    path("api/", include("api.urls")),
-    path('front/', include("frontend.urls"))
+    path("api/", include("api.urls"))
 ]
