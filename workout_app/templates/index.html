@@ -1,57 +1,15 @@
+{% load render_bundle from webpack_loader %}
+
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Workout</title>
-</head>
-<body>
-    <button id="get_btn" type="button">Workout List</button>
-    <div id="id"></div>
-    <div id="user"></div>
-    <div id="workout"></div>
-    <script>
-        const url = "http://127.0.0.1:8000/api/workouts/";
-        const idList = document.getElementById("get_id");
-        const get_user = document.getElementById("get_user");
-        const get_workout = document.getElementById("get_workout");
-        fetch(url).then(function(response) {
-                   return response.json();
-               }).then(function(json) {
-                   console.log(json);
-                   for(const workout of json){
-                       if(!workout.memo) {
-                        document.write(`<li>${workout.id}</li><br>`);
-                        document.write(`<li>${workout.user.username}</li><br>`);
-                        document.write(`<li>${workout.part_of_body}</li><br>`);
-                        document.write(`<li>${workout.workout}</li><br>`);
-                        document.write(`-----------------------------`);
-                       } else {
-                       document.write(`<li>${workout.id}</li><br>`);
-                       document.write(`<li>${workout.user.username}</li><br>`);
-                       document.write(`<li>${workout.part_of_body}</li><br>`);
-                       document.write(`<li>${workout.workout}</li><br>`);
-                       document.write(`<li>${workout.memo}</li><br>`);
-                       document.write(`-----------------------------`);
-                       }
-                   }
-                });
-        document.getElementById("get_btn")
-            .addEventListener("click", () => {
-               fetch(url).then(function(response) {
-                   return response.json();
-               }).then(function(json) {
-                   console.log(json);
-                   for(const workout of json){
-                       document.write(`<li>${workout.id}</li><br>`);
-                       document.write(`<li>${workout.user.username}</li><br>`);
-                       document.write(`<li>${workout.part_of_body}</li><br>`);
-                       document.write(`<li>${workout.workout}</li><br>`);
-                       document.write(`<li>${workout.memo}</li><br>`);
-                       document.write(`-----------------------------`);
-                   }
-                })
-            });
-  </script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Workout APP</title>
+  </head>
+  <header>ここにヘッダー</header>
+  <body>
+    <div id="app"></div>
+    {% render_bundle 'app' %}
+  </body>
 </html>

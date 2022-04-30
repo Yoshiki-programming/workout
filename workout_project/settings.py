@@ -16,6 +16,7 @@ from dotenv import (
     find_dotenv,
     load_dotenv,
 )
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -45,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'api',
+    'webpack_loader',
 ]
 
 MIDDLEWARE = [
@@ -136,3 +138,15 @@ AUTH_USER_MODEL = 'workout_app.User'
 LOGIN_URL = "/login/"
 LOGOUT_REDIRECT_URL = "/login/"
 LOGIN_REDIRECT_URL = '/API/workout-records/'
+
+REST_FRAMEWORK = {
+    'PAGE_SIZE': 6,
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination'
+}
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'BUNDLE_DIR_NAME': 'dist/',
+        'STATS_FILE': os.path.join(BASE_DIR, 'frontend', 'webpack-stats.json')
+    }
+}
