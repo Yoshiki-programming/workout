@@ -2,9 +2,14 @@
   <div>
     <v-container>
       <h2 class="mb-5">{{ workout.workout }}</h2>
-      <p>body part：{{ workout.part_of_body }}</p>
-      <p>memo：{{ workout.memo }}</p>
+      <p>BODY PART：{{ workout.part_of_body }}</p>
+      <p>MEMO：{{ workout.memo }}</p>
     </v-container>
+    <v-btn to="/workout-records">RECORD</v-btn>
+    <v-btn :to="{ name: 'editor', params: { id: workout.id } }"
+      >EDIT WORKOUT</v-btn
+    >
+    <v-btn to="/">DELETE WORKOUT</v-btn>
   </div>
 </template>
 
@@ -38,6 +43,7 @@ export default {
   },
   created() {
     this.getWorkoutData();
+    console.log(this.workout);
   },
 };
 </script>

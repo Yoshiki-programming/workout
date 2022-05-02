@@ -1,13 +1,17 @@
 from django.contrib.auth import get_user_model
-from rest_framework import generics
+from rest_framework import generics, pagination
 from workout_app.models import Workout, WorkoutDetail
 from .serializers import WorkoutDetailSerializer, WorkoutSerializer, MypageSerializer
 User = get_user_model()
 # Create your views here.
 
+class APIPagination(pagination.PageNumberPagination):
+    page_size = 5
+
 # ログインユーザーで筋トレメニューをpost、追加したメニューをgetできる
 class WorkoutListAPI(generics.ListCreateAPIView):
     serializer_class = WorkoutSerializer
+    pagination_class = APIPagination
     def get_queryset(self):
         user = self.request.user
         return Workout.objects.filter(user=user).order_by("-id")
@@ -17,6 +21,7 @@ class WorkoutListAPI(generics.ListCreateAPIView):
 # 各ユーザー追加して筋トレのメニューの更新、削除
 class WorkoutDetailAPI(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = WorkoutSerializer
+    pagination_class = APIPagination
     def get_queryset(self):
         user = self.request.user
         return Workout.objects.filter(user=user).order_by("-id")

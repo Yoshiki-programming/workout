@@ -8,5 +8,4 @@ urlpatterns = [
     path("user-update/<int:pk>", views.UserUpdate.as_view(), name="update"),
     path("user-info/<int:pk>/", views.UserDetail.as_view(), name="info"),
     path("", views.MypageView.as_view()),
-    path("about/", views.MypageView.as_view()),
 ]

@@ -137,7 +137,7 @@ AUTH_USER_MODEL = 'workout_app.User'
 
 LOGIN_URL = "/login/"
 LOGOUT_REDIRECT_URL = "/login/"
-LOGIN_REDIRECT_URL = '/API/workout-records/'
+LOGIN_REDIRECT_URL = '/'
 
 REST_FRAMEWORK = {
     'PAGE_SIZE': 6,
