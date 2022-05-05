@@ -56,10 +56,9 @@ class WorkoutDetail(models.Model):
         blank=True,
         null=True,
         )
-    date = models.DateField(
+    date = models.DateTimeField(
         verbose_name="日付",
-        blank=True,
-        null=True,
+        auto_now=True
         )
     memo = models.TextField(
         verbose_name="メモ",

@@ -2,21 +2,11 @@
   <div>
     <v-container style="size: 150px">
       <form @submit.prevent="onSubmit">
-        <v-select v-model="part_of_body" label="部位" :items="body_items">
-        </v-select>
+        <v-text-field v-model="weight" label="重さ"> </v-text-field>
 
-        <v-text-field
-          v-model="workout"
-          label="メニュー"
-          required
-        ></v-text-field>
+        <v-text-field v-model="reps" label="回数" required></v-text-field>
 
         <v-textarea v-model="memo" label="メモ"></v-textarea>
-        <v-btn
-          color="success"
-          :to="{ name: 'workout', params: { id: this.id } }"
-          >戻る</v-btn
-        >
         <v-btn color="success" type="submit">編集を保存</v-btn>
       </form>
     </v-container>
@@ -27,7 +17,7 @@
 import { apiService } from "../common/api.service.js";
 
 export default {
-  name: "MyEditor",
+  name: "RecordEdit",
   props: {
     id: {
       type: Number,
@@ -37,34 +27,34 @@ export default {
   data() {
     return {
       workout: null,
-      part_of_body: null,
+      weight: null,
+      reps: null,
       memo: null,
-      body_items: ["腹筋", "腕", "背中", "胸", "脚", "肩"],
     };
   },
   methods: {
     onSubmit() {
-      let endpoint = `/api/workouts/${this.id}/`;
+      let endpoint = `/api/workout-records/${this.id}/record/`;
       let method = "PUT";
       apiService(endpoint, method, {
-        workout: this.workout,
-        part_of_body: this.part_of_body,
+        weight: this.weight,
+        reps: this.reps,
         memo: this.memo,
-      }).then((workout_data) => {
+      }).then(() => {
         this.$router.push({
-          name: "workout",
-          params: { id: workout_data.id },
+          name: "home",
         });
       });
     },
   },
   async beforeRouteEnter(to, from, next) {
     if (to.params.id !== undefined) {
-      let endpoint = `/api/workouts/${to.params.id}/`;
+      let endpoint = `/api/workout-records/${to.params.id}/record/`;
       let data = await apiService(endpoint);
       return next((vm) => {
         (vm.workout = data.workout),
-          (vm.part_of_body = data.part_of_body),
+          (vm.weight = data.weight),
+          (vm.reps = data.reps),
           (vm.memo = data.memo);
       });
     } else {
@@ -72,7 +62,7 @@ export default {
     }
   },
   created() {
-    document.title = "Edit - workout";
+    document.title = "記録 - 編集";
   },
 };
 </script>

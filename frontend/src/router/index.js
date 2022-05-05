@@ -4,6 +4,8 @@ import Home from "../views/MyHome.vue";
 import Workout from "../views/MyWorkout.vue";
 import Record from "../views/MyWorkoutRecord";
 import Editor from "../views/MyWorkoutEditor";
+import RecordDetatail from "../views/MyRecordDetail";
+import RecordEdit from "../views/MyWorkoutRecordEdit";
 Vue.use(VueRouter);
 
 const routes = [
@@ -16,23 +18,36 @@ const routes = [
     path: "/workout/:id", // 追加
     name: "workout",
     component: Workout,
-    props: true,
+    props: (route) => ({ id: parseInt(route.params.id) }),
   },
   {
-    path: "/workout-records", // 追加
-    name: "WorkoutRecord",
+    path: "/record/:id", // 追加
+    name: "MyRecord",
     component: Record,
+    props: (route) => ({ id: parseInt(route.params.id) }),
   },
   {
-    path: "editor/:id", // 追加
-    name: "editor",
+    path: "/record-detail/:id", // 追加
+    name: "RecordDetail",
+    component: RecordDetatail,
+    props: (route) => ({ id: parseInt(route.params.id) }),
+  },
+  {
+    path: "/edit/:id", // 追加
+    name: "MyEditor",
     component: Editor,
-    props: true,
+    props: (route) => ({ id: parseInt(route.params.id) }),
+  },
+  {
+    path: "/record-edit/:id", // 追加
+    name: "RecordEdit",
+    component: RecordEdit,
+    props: (route) => ({ id: parseInt(route.params.id) }),
   },
 ];
 
 const router = new VueRouter({
-  mode: "history",
+  mode: "hash",
   routes,
 });
 

@@ -1,8 +1,10 @@
 from django.contrib.auth import get_user_model
 from rest_framework import generics, pagination
 from workout_app.models import Workout, WorkoutDetail
-from .serializers import WorkoutDetailSerializer, WorkoutSerializer, MypageSerializer
+from .serializers import UserSerializer, WorkoutDetailSerializer, WorkoutSerializer, MypageSerializer
 User = get_user_model()
+import logging
+ 
 # Create your views here.
 
 class APIPagination(pagination.PageNumberPagination):
@@ -29,9 +31,11 @@ class WorkoutDetailAPI(generics.RetrieveUpdateDestroyAPIView):
 # リクエストユーザーが保存した筋トレの記録を追加できる、兼マイページ
 class WorkoutRecordlistAPI(generics.ListCreateAPIView):
     serializer_class = WorkoutDetailSerializer
+    pagination_class = APIPagination
     def get_queryset(self):
         user = self.request.user
-        return WorkoutDetail.objects.filter(workout__user=user).order_by("-id")
+        workout = self.kwargs['workout']
+        return WorkoutDetail.objects.filter(workout__user=user, workout__id=workout).order_by("-id")
     # def perform_create(self, serializer):
     #     serializer.save()
 
@@ -41,3 +45,4 @@ class WorkoutRecordDetailAPI(generics.RetrieveUpdateDestroyAPIView):
     def get_queryset(self):
         user = self.request.user
         return WorkoutDetail.objects.filter(workout__user=user).order_by("-id")
+    
