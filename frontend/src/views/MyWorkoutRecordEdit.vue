@@ -7,7 +7,13 @@
         <v-text-field v-model="reps" label="回数" required></v-text-field>
 
         <v-textarea v-model="memo" label="メモ"></v-textarea>
-        <v-btn color="success" type="submit">編集を保存</v-btn>
+        <v-btn
+          color="primary"
+          :to="{ name: 'RecordDetail', params: { id: this.id } }"
+          text
+          >戻る</v-btn
+        >
+        <v-btn color="primary" type="submit">保存</v-btn>
       </form>
     </v-container>
   </div>

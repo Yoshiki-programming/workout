@@ -1,20 +1,44 @@
 <template>
   <div>
-    <v-container style="size: 150px">筋トレの記録</v-container>
     <v-row justify="space-around">
       <v-col cols="auto">
         <v-dialog transition="dialog-top-transition" max-width="600">
           <template v-slot:activator="{ on, attrs }">
-            <v-btn color="success" v-bind="attrs" v-on="on">+</v-btn>
+            <v-row justify="center">
+              <v-col>
+                <v-btn color="primary" :to="{ name: 'workout' }" text
+                  >戻る</v-btn
+                >
+              </v-col>
+              <v-col>
+                <v-btn color="primary" v-bind="attrs" v-on="on">追加</v-btn>
+              </v-col>
+              <v-col>
+                <v-btn
+                  v-if="workoutrecords[0]"
+                  color="primary"
+                  :to="{
+                    name: 'MyGraph',
+                    params: { id: workoutrecords[0].workout.id },
+                  }"
+                  >グラフ</v-btn
+                >
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col>
+                <div v-if="workoutrecords[0]">
+                  {{ workoutrecords[0].workout.workout }}の記録
+                </div>
+              </v-col>
+            </v-row>
           </template>
           <template v-slot:default="dialog">
             <v-card>
-              <v-toolbar color="success" dark>記録する</v-toolbar>
-              <v-divider></v-divider>
+              <v-toolbar color="#1D1DF" dark>記録</v-toolbar>
               <v-card-text style="height: 400px">
                 <form @submit.prevent="onSubmit">
-                  <v-text-field required v-model="weight" label="重さ">
-                  </v-text-field>
+                  <v-text-field v-model="weight" label="重量"> </v-text-field>
 
                   <v-text-field
                     v-model="reps"
@@ -23,14 +47,13 @@
                   ></v-text-field>
 
                   <v-textarea v-model="memo" label="メモ"></v-textarea>
-                  <v-btn color="success" text @click="dialog.value = false">
+                  <v-btn color="primary" @click="dialog.value = false" text>
                     閉じる
                   </v-btn>
                   <v-btn
                     v-if="reps"
-                    color="success"
+                    color="primary"
                     type="submit"
-                    text
                     @click="dialog.value = false"
                   >
                     保存する
@@ -49,13 +72,9 @@
             :to="{ name: 'RecordDetail', params: { id: record.id } }"
             class="myworkoutrecord-link"
           >
-            <v-card>
-              <v-card-title>
-                {{ record.workout.workout }} /
-                {{ record.workout.part_of_body }}</v-card-title
-              >
-              <v-card-text style="size: 50px"
-                >{{ record.weight }} KG</v-card-text
+            <v-card class="my-5 mx-2" color="#fbfbfd" elevation="5">
+              <v-card-title style="size: 50px"
+                >{{ record.weight }} KG</v-card-title
               >
               <v-card-text style="size: 50px">{{ record.reps }} 回</v-card-text>
               <v-card-text style="size: 50px"
@@ -68,12 +87,14 @@
           </router-link>
         </h2>
       </div>
-      <div class="my-4">
-        <p v-show="loading">...loading...</p>
-        <v-btn v-show="next" @click="getWorkoutRecords" color="success"
-          >もっと見る
-        </v-btn>
-      </div>
+      <v-row justify="space-around">
+        <v-col cols="auto">
+          <p v-show="loading">...loading...</p>
+          <v-btn v-show="next" @click="getWorkoutRecords" color="primary" text
+            >もっと見る
+          </v-btn>
+        </v-col>
+      </v-row>
     </v-main>
   </div>
 </template>

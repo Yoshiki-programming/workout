@@ -1,18 +1,19 @@
 <template>
   <div>
-    <v-container fixed style="size: 150px">筋トレの追加、選択</v-container>
     <v-row justify="space-around">
       <v-col cols="auto">
         <v-dialog transition="dialog-top-transition" max-width="600">
           <template v-slot:activator="{ on, attrs }">
-            <v-btn color="success" v-bind="attrs" v-on="on"
-              >筋トレを追加する</v-btn
-            >
+            <v-row justify="center" class="my-5">
+              <v-btn color="primary" v-bind="attrs" v-on="on">追加</v-btn>
+            </v-row>
+            <v-row>
+              <div>トレーニングメニューの追加</div>
+            </v-row>
           </template>
           <template v-slot:default="dialog">
             <v-card>
-              <v-toolbar color="success" dark>筋トレを追加する</v-toolbar>
-              <v-divider></v-divider>
+              <v-toolbar color="#1D1DF" dark>追加</v-toolbar>
               <v-card-text style="height: 400px">
                 <form @submit.prevent="onSubmit">
                   <v-select
@@ -30,17 +31,16 @@
                   ></v-text-field>
 
                   <v-textarea v-model="memo" label="メモ"></v-textarea>
-                  <v-btn color="success" text @click="dialog.value = false">
-                    閉じる
+                  <v-btn color="primary" @click="dialog.value = false" text>
+                    戻る
                   </v-btn>
                   <v-btn
                     v-if="part_of_body && workout"
-                    color="success"
+                    color="primary"
                     type="submit"
-                    text
                     @click="dialog.value = false"
                   >
-                    保存する
+                    保存
                   </v-btn>
                 </form>
               </v-card-text>
@@ -56,9 +56,9 @@
             :to="{ name: 'workout', params: { id: workout.id } }"
             class="workout-link"
           >
-            <v-card>
+            <v-card class="my-5 mx-2" color="#fbfbfd" elevation="5">
               <v-card-title> {{ workout.part_of_body }}</v-card-title>
-              <v-card-text style="size: 50px">{{
+              <v-card-text style="size: 100px">{{
                 workout.workout
               }}</v-card-text>
             </v-card>
@@ -68,7 +68,7 @@
       <v-row justify="space-around">
         <v-col cols="auto">
           <p v-show="loading">...ローディング...</p>
-          <v-btn v-show="next" @click="getWorkouts" color="success"
+          <v-btn v-show="next" @click="getWorkouts" color="primary" text
             >もっと見る
           </v-btn>
         </v-col>

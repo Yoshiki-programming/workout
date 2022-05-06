@@ -1,15 +1,33 @@
 <template>
   <div>
-    <v-container>
-      <h2 class="mb-5">{{ workout.workout }}</h2>
-      <p>部位：{{ workout.part_of_body }}</p>
-      <p>メモ：{{ workout.memo }}</p>
-    </v-container>
-    <v-btn :to="{ name: 'MyRecord', params: { id: this.id } }"
-      >記録を見る</v-btn
-    >
-    <v-btn :to="{ name: 'MyEditor', params: { id: this.id } }">編集する</v-btn>
-    <v-btn color="error" @click="deleteWorkoutData">削除する</v-btn>
+    <v-row justify="center" class="my-5">
+      <v-btn color="primary" :to="{ name: 'MyRecord', params: { id: this.id } }"
+        >記録</v-btn
+      >
+    </v-row>
+    <v-row justify="center" class="my-5">
+      <div>{{ workout.workout }}の記録を確認する</div>
+    </v-row>
+    <v-card outlined class="mx-2">
+      <v-container>
+        <p class="mb-5">{{ workout.workout }}</p>
+        <p>部位：{{ workout.part_of_body }}</p>
+        <p>メモ：{{ workout.memo }}</p>
+      </v-container>
+    </v-card>
+    <v-row justify="center">
+      <v-btn color="primary" :to="{ name: 'home' }" text class="mx-2 my-5"
+        >戻る</v-btn
+      >
+      <v-btn
+        color="primary"
+        :to="{ name: 'MyEditor', params: { id: this.id } }"
+        text
+        class="mx-2 my-5"
+        >編集</v-btn
+      >
+      <v-btn color="error" @click="deleteWorkoutData" class="my-5">削除</v-btn>
+    </v-row>
   </div>
 </template>
 
