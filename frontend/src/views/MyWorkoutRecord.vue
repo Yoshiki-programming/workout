@@ -25,12 +25,10 @@
                 >
               </v-col>
             </v-row>
-            <v-row>
-              <v-col>
-                <div v-if="workoutrecords[0]">
-                  {{ workoutrecords[0].workout.workout }}の記録
-                </div>
-              </v-col>
+            <v-row justify="center" class="my-5">
+              <div v-if="workoutrecords[0]">
+                {{ workoutrecords[0].workout.workout }}の記録
+              </div>
             </v-row>
           </template>
           <template v-slot:default="dialog">

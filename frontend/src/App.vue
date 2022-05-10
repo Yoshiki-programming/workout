@@ -41,7 +41,7 @@ export default {
   },
   created() {
     this.getWorkouts();
-    console.log(this.workouts);
+    // console.log(this.workouts);
   },
 };
 </script>
