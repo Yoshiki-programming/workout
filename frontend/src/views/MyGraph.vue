@@ -5,8 +5,6 @@
     </v-row>
     <v-card class="my-5 mx-2" color="#fbfbfd" elevation="5">
       <LineChart v-if="loaded" :chart-data="chartData" :options="options" />
-    </v-card>
-    <v-card class="my-5 mx-2" color="#fbfbfd" elevation="5">
       <LineChart v-if="loaded" :chart-data="chartData2" :options="options2" />
     </v-card>
     <v-row justify="center">
@@ -71,7 +69,7 @@ export default {
           {
             scaleLabel: {
               display: true,
-              labelString: "過去15セット",
+              labelString: "過去15セット()",
             },
           },
         ],
