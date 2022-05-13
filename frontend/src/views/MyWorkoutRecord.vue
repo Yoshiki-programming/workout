@@ -64,26 +64,33 @@
       </v-col>
     </v-row>
     <v-main>
-      <div v-for="record in workoutrecords" :key="record.pk">
-        <h2>
-          <router-link
-            :to="{ name: 'RecordDetail', params: { id: record.id } }"
-            class="myworkoutrecord-link"
-          >
-            <v-card class="my-5 mx-2" color="#fbfbfd" elevation="10">
-              <v-card-title style="size: 50px"
-                >{{ record.weight }} KG</v-card-title
-              >
-              <v-card-text style="size: 50px">{{ record.reps }} 回</v-card-text>
-              <v-card-text style="size: 50px"
-                >メモ：{{ record.memo }}</v-card-text
-              >
-              <v-card-text style="size: 50px"
-                >日時：{{ record.date }}</v-card-text
-              >
-            </v-card>
-          </router-link>
-        </h2>
+      <div v-if="workoutrecords[0]">
+        <div v-for="record in workoutrecords" :key="record.pk">
+          <h2>
+            <router-link
+              :to="{ name: 'RecordDetail', params: { id: record.id } }"
+              class="myworkoutrecord-link"
+            >
+              <v-card class="my-5 mx-2" color="#fbfbfd" elevation="10">
+                <v-card-title style="size: 50px"
+                  >{{ record.weight }} KG</v-card-title
+                >
+                <v-card-text style="size: 50px"
+                  >{{ record.reps }} 回</v-card-text
+                >
+                <v-card-text style="size: 50px"
+                  >メモ：{{ record.memo }}</v-card-text
+                >
+                <v-card-text style="size: 50px"
+                  >日時：{{ record.date }}</v-card-text
+                >
+              </v-card>
+            </router-link>
+          </h2>
+        </div>
+      </div>
+      <div v-else>
+        <v-container class="text-center">記録はまだありません。</v-container>
       </div>
       <v-row justify="space-around">
         <v-col cols="auto">

@@ -3,10 +3,15 @@
     <v-row justify="center">
       <div>トレーニングの重量と回数のグラフ</div>
     </v-row>
-    <v-card class="my-5 mx-2" color="#fbfbfd" elevation="5">
-      <LineChart v-if="loaded" :chart-data="chartData" :options="options" />
-      <LineChart v-if="loaded" :chart-data="chartData2" :options="options2" />
-    </v-card>
+    <div v-if="this.chartData.datasets[0] || this.chartData2.datasets[0]">
+      <v-card class="my-5 mx-2" color="#fbfbfd" elevation="5">
+        <LineChart v-if="loaded" :chart-data="chartData" :options="options" />
+        <LineChart v-if="loaded" :chart-data="chartData2" :options="options2" />
+      </v-card>
+    </div>
+    <div v-else>
+      <v-container class="text-center">記録はまだありません。</v-container>
+    </div>
     <v-row justify="center">
       <v-btn
         :to="{
@@ -106,7 +111,7 @@ export default {
             },
             ticks: {
               beginAtZero: true,
-              stepSize: 3,
+              stepSize: 5,
             },
           },
         ],

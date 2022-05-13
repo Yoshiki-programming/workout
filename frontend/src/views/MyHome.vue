@@ -55,20 +55,27 @@
       </v-col>
     </v-row>
     <v-main>
-      <div v-for="workout in workouts" :key="workout.pk">
-        <h2>
-          <router-link
-            :to="{ name: 'workout', params: { id: workout.id } }"
-            class="workout-link"
-          >
-            <v-card class="my-5 mx-3" color="#fbfbfd" elevation="10">
-              <v-card-title> {{ workout.part_of_body }}</v-card-title>
-              <v-card-text style="size: 100px">{{
-                workout.workout
-              }}</v-card-text>
-            </v-card>
-          </router-link>
-        </h2>
+      <div v-if="workouts[0]">
+        <div v-for="workout in workouts" :key="workout.pk">
+          <h2>
+            <router-link
+              :to="{ name: 'workout', params: { id: workout.id } }"
+              class="workout-link"
+            >
+              <v-card class="my-5 mx-3" color="#fbfbfd" elevation="10">
+                <v-card-title> {{ workout.part_of_body }}</v-card-title>
+                <v-card-text style="size: 100px">{{
+                  workout.workout
+                }}</v-card-text>
+              </v-card>
+            </router-link>
+          </h2>
+        </div>
+      </div>
+      <div v-else>
+        <v-container class="text-center"
+          >メニューはまだありません。</v-container
+        >
       </div>
       <v-row justify="space-around">
         <v-col cols="auto">
@@ -125,11 +132,6 @@ export default {
       this.loading = true;
       apiService(endpoint).then((data) => {
         this.user_list = data.results[0];
-        if (data.next) {
-          this.next = data.next;
-        } else {
-          this.next = null;
-        }
       });
     },
     onSubmit() {
