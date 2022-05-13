@@ -1,0 +1,29 @@
+body {
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    background:#ddd url("image/workout-ga6e9733a9_1920.jpeg") no-repeat center center;
+    background-size:cover;
+  }
+
+.login_form {
+  height:50em;
+  margin:0 auto;
+  
+  /*　追加　*/
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align: center;
+  }
+
+.signup_form {
+    height:50em;
+    margin:0 auto;
+    
+    /*　追加　*/
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align: center;
+    }

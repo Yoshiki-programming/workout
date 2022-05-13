@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-row justify="center">
-      <div>トレーニングの回数と重量のグラフ</div>
+      <div>トレーニングの重量と回数のグラフ</div>
     </v-row>
     <v-card class="my-5 mx-2" color="#fbfbfd" elevation="5">
       <LineChart v-if="loaded" :chart-data="chartData" :options="options" />

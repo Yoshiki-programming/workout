@@ -1,16 +1,22 @@
-from django.views.generic import CreateView, UpdateView, DetailView, TemplateView
-from .forms import SignUpForm, UserUpdateForm
-from django.views import generic
+from django.views.generic import CreateView, TemplateView
+from .forms import SignUpForm
 from django.urls import reverse_lazy
 from django.contrib.auth import get_user_model
-from django.shortcuts import resolve_url
+from django.contrib.auth import login, authenticate
 User = get_user_model()
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 class SignUpView(CreateView):
     form_class = SignUpForm
-    success_url = reverse_lazy('workout_app:login')
+    success_url = reverse_lazy('workout_app:top')
     template_name = 'registration/signup.html'
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        username = form.cleaned_data.get('username')
+        password = form.cleaned_data.get('password1')
+        user = authenticate(username=username, password=password)
+        login(self.request, user)
+        return response
 
 class OnlyYouMixin(UserPassesTestMixin):
     raise_exception = True
@@ -18,17 +24,6 @@ class OnlyYouMixin(UserPassesTestMixin):
     def test_func(self):
         user = self.request.user
         return user.pk == self.kwargs['pk'] or user.is_superuser
-
-class UserDetail(OnlyYouMixin, DetailView):
-    model = User
-    template_name = 'user_detail.html'
-
-class UserUpdate(OnlyYouMixin, UpdateView):
-    model = User
-    form_class = UserUpdateForm
-    template_name = 'user_update_form.html'
-    def get_success_url(self):
-        return resolve_url('workout_app:user_detail', pk=self.kwargs['pk'])
 
 class MypageView(TemplateView):
     template_name = 'index.html'

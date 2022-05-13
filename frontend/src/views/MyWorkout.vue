@@ -10,7 +10,9 @@
     </v-row>
     <v-card outlined class="mx-2">
       <v-container>
-        <p class="mb-5">{{ workout.workout }}</p>
+        <h2 class="text-center">
+          <p class="mb-5">{{ workout.workout }}</p>
+        </h2>
         <p>部位：{{ workout.part_of_body }}</p>
         <p>メモ：{{ workout.memo }}</p>
       </v-container>

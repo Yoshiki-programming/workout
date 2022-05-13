@@ -1,7 +1,8 @@
 from django.contrib.auth import get_user_model
-from rest_framework import generics, pagination
+from rest_framework import generics, pagination, permissions
 from workout_app.models import Workout, WorkoutDetail
 from .serializers import UserSerializer, WorkoutDetailSerializer, WorkoutSerializer, MypageSerializer
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 User = get_user_model()
 import logging
  
@@ -12,6 +13,8 @@ class APIPagination(pagination.PageNumberPagination):
 
 # ログインユーザーで筋トレメニューをpost、追加したメニューをgetできる
 class WorkoutListAPI(generics.ListCreateAPIView):
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    permission_classes = (permissions.IsAuthenticated,)
     serializer_class = WorkoutSerializer
     pagination_class = APIPagination
     def get_queryset(self):
@@ -22,6 +25,8 @@ class WorkoutListAPI(generics.ListCreateAPIView):
 
 # 各ユーザー追加して筋トレのメニューの更新、削除
 class WorkoutDetailAPI(generics.RetrieveUpdateDestroyAPIView):
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    permission_classes = (permissions.IsAuthenticated,)
     serializer_class = WorkoutSerializer
     pagination_class = APIPagination
     def get_queryset(self):
@@ -30,6 +35,8 @@ class WorkoutDetailAPI(generics.RetrieveUpdateDestroyAPIView):
     
 # リクエストユーザーが保存した筋トレの記録を追加できる、兼マイページ
 class WorkoutRecordlistAPI(generics.ListCreateAPIView):
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    permission_classes = (permissions.IsAuthenticated,)
     serializer_class = WorkoutDetailSerializer
     pagination_class = APIPagination
     def get_queryset(self):
@@ -41,8 +48,26 @@ class WorkoutRecordlistAPI(generics.ListCreateAPIView):
 
 # ワークアウト記録を更新、削除するapi
 class WorkoutRecordDetailAPI(generics.RetrieveUpdateDestroyAPIView):
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    permission_classes = (permissions.IsAuthenticated,)
     serializer_class = WorkoutDetailSerializer
     def get_queryset(self):
         user = self.request.user
         return WorkoutDetail.objects.filter(workout__user=user).order_by("-id")
+    
+class UserDetailAPI(generics.RetrieveUpdateDestroyAPIView):
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    permission_classes = (permissions.IsAuthenticated,)
+    serializer_class = UserSerializer
+    def get_queryset(self):
+        user = self.request.user
+        return User.objects.filter(username=user)
+
+class UserListAPI(generics.ListAPIView):
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    permission_classes = (permissions.IsAuthenticated,)
+    serializer_class = UserSerializer
+    def get_queryset(self):
+        user = self.request.user
+        return User.objects.filter(username=user)
     

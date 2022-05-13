@@ -4,6 +4,11 @@
       <v-col cols="auto">
         <v-dialog transition="dialog-top-transition" max-width="600">
           <template v-slot:activator="{ on, attrs }">
+            <v-row justify="center" class="my-1">
+              <h3>
+                <p>{{ user_list.username }}さん、こんにちは！</p>
+              </h3>
+            </v-row>
             <v-row justify="center" class="my-5">
               <v-btn color="primary" v-bind="attrs" v-on="on">追加</v-btn>
             </v-row>
@@ -56,7 +61,7 @@
             :to="{ name: 'workout', params: { id: workout.id } }"
             class="workout-link"
           >
-            <v-card class="my-5 mx-2" color="#fbfbfd" elevation="5">
+            <v-card class="my-5 mx-3" color="#fbfbfd" elevation="10">
               <v-card-title> {{ workout.part_of_body }}</v-card-title>
               <v-card-text style="size: 100px">{{
                 workout.workout
@@ -84,6 +89,7 @@ export default {
   data() {
     return {
       workouts: [],
+      user_list: {},
       user: null,
       part_of_body: null,
       workout: null,
@@ -111,6 +117,21 @@ export default {
         }
       });
     },
+    getUser() {
+      let endpoint = "api/user/";
+      if (this.next) {
+        endpoint = this.next;
+      }
+      this.loading = true;
+      apiService(endpoint).then((data) => {
+        this.user_list = data.results[0];
+        if (data.next) {
+          this.next = data.next;
+        } else {
+          this.next = null;
+        }
+      });
+    },
     onSubmit() {
       let endpoint = "/api/workouts/";
       let method = "POST";
@@ -126,6 +147,7 @@ export default {
 
   created() {
     this.getWorkouts();
+    this.getUser();
     // console.log(this.workouts);
   },
 };

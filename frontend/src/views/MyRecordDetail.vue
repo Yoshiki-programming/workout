@@ -5,7 +5,9 @@
     </v-row>
     <v-card outlined class="mx-2">
       <v-container>
-        <p v-if="record.workout">{{ record.workout.workout }}</p>
+        <h2 class="text-center">
+          <p v-if="record.workout">{{ record.workout.workout }}</p>
+        </h2>
         <p>重さ：{{ record.weight }} KG</p>
         <p>回数：{{ record.reps }}</p>
         <p>メモ：{{ record.memo }}</p>
@@ -74,6 +76,7 @@ export default {
   },
   created() {
     this.getRecordData();
+    console.log(this.record);
     // console.log(this.id);
   },
 };

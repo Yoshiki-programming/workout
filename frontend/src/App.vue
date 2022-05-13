@@ -1,10 +1,11 @@
 <template>
   <v-app>
     <v-app-bar color="#1D1DF" dark app>
-      <v-toolbar-title>筋トレ</v-toolbar-title>
+      <v-toolbar-title><v-btn to="/">ホーム</v-btn></v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items>
-        <v-btn text to="/">ホーム</v-btn>
+        <v-btn text :to="{ name: 'UserList' }">ユーザー情報</v-btn>
+        <v-btn text href="/auth/logout/">ログアウト</v-btn>
       </v-toolbar-items>
     </v-app-bar>
     <v-main>
@@ -16,32 +17,3 @@
     </v-footer>
   </v-app>
 </template>
-<script>
-import { apiService } from "../src/common/api.service.js";
-export default {
-  name: "App",
-  data() {
-    return {
-      workouts: [],
-      user: null,
-    };
-  },
-  methods: {
-    getWorkouts() {
-      let endpoint = "api/workouts/";
-      apiService(endpoint).then((data) => {
-        this.workouts.push(...data.results);
-        if (data.next) {
-          this.next = data.next;
-        } else {
-          this.next = null;
-        }
-      });
-    },
-  },
-  created() {
-    this.getWorkouts();
-    // console.log(this.workouts);
-  },
-};
-</script>

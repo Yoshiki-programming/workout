@@ -70,7 +70,7 @@
             :to="{ name: 'RecordDetail', params: { id: record.id } }"
             class="myworkoutrecord-link"
           >
-            <v-card class="my-5 mx-2" color="#fbfbfd" elevation="5">
+            <v-card class="my-5 mx-2" color="#fbfbfd" elevation="10">
               <v-card-title style="size: 50px"
                 >{{ record.weight }} KG</v-card-title
               >

@@ -7,6 +7,8 @@ import Editor from "../views/MyWorkoutEditor";
 import RecordDetatail from "../views/MyRecordDetail";
 import RecordEdit from "../views/MyWorkoutRecordEdit";
 import Graph from "../views/MyGraph";
+import UserInfo from "../views/UserInfo";
+import UserList from "../views/UserList";
 Vue.use(VueRouter);
 
 const routes = [
@@ -50,6 +52,17 @@ const routes = [
     name: "MyGraph",
     component: Graph,
     props: (route) => ({ id: parseInt(route.params.id) }),
+  },
+  {
+    path: "/user/:id", // 追加
+    name: "UserInfo",
+    component: UserInfo,
+    props: (route) => ({ id: parseInt(route.params.id) }),
+  },
+  {
+    path: "/user", // 追加
+    name: "UserList",
+    component: UserList,
   },
 ];
 

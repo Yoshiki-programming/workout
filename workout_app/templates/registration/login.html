@@ -1,4 +1,42 @@
 {% extends "base.html" %}
 {% block main %}
-{% include "_form.html" with submit_label="LOGIN" %}
+<div class="login_form">
+    <div class="card text-center" style="width: 90%;">
+        <div class="card-header">
+          ログイン
+        </div>
+        <div class="card-body">
+            <div id="content-container" class="container p-none">
+                <div class="lgn-container col-lg-8">
+                    <form id="login-form" method="post" 
+                        action="{% url 'login' %}">
+                        {% csrf_token %}
+                        <table class="table">
+                            <tr>
+                                <td><label for="id_username">ユーザー名</label></td>
+                                <td><input id="id_username" name="username" 
+                                        type="text" class="form-control form-control-lg"></td>
+                            </tr>
+                            <tr>
+                                <td><label for="id_password">パスワード</label></td>
+                                <td><input id="id_password" name="password" 
+                                        type="password" class="form-control form-control-lg"></td>
+                            </tr>
+                        </table>
+                        {% if form.errors %}
+                            <p class=" label label-danger">
+                                ユーザー名もしくはパスワードが違います。
+                            </p>
+                        {% endif %}
+        
+                        <input type="submit" value="ログイン" 
+                            class="btn btn-primary pull-right" />
+                        <input type="hidden" name="next" value="{{ next }}" />
+                    </form>
+                    <p style="padding-top: 5%;">新規登録は<a href="/signup/">こちら</a>から</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
