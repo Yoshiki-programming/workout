@@ -148,5 +148,5 @@ WEBPACK_LOADER = {
     }
 }
 
-STATIC_URL = '/css/static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
