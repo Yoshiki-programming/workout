@@ -29,3 +29,5 @@ jsconfig.js
 package-lock.json
 package.json
 vue.config.js
+
+settings.py
