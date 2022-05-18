@@ -1,0 +1,16 @@
+{% load render_bundle from webpack_loader %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static '/dist/css/app.929025f3.css' %}">
+    <title>筋トレ</title>
+  </head>
+  <body>
+    <div id="app">
+      {% render_bundle 'app' %}
+    </div>
+  </body>
+</html>
