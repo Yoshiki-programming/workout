@@ -9,9 +9,8 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-import datetime
+
 from pathlib import Path
-import turtle
 import dj_database_url
 from dotenv import (
     find_dotenv,
