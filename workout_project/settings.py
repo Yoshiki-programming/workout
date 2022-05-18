@@ -17,6 +17,8 @@ from dotenv import (
     load_dotenv,
 )
 import os
+import django_heroku
+import logging
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,7 +33,10 @@ SECRET_KEY = 'django-insecure-h6i$ohe=23&1c&-f-^m=!desyx7_l^r=70^*=%fv)_b7oo$ukv
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = [
+    "yoshi-workout-app.herokuapp.com",
+    "*"
+]
 
 
 # Application definition
@@ -145,9 +150,10 @@ REST_FRAMEWORK = {
 WEBPACK_LOADER = {
     'DEFAULT': {
         'BUNDLE_DIR_NAME': 'dist/',
-        'STATS_FILE': os.path.join(BASE_DIR, 'frontend', 'webpack-stats.json')
+        'STATS_FILE': os.path.join(BASE_DIR, 'frontend/webpack-stats.json')
     }
 }
+logging.info(BASE_DIR)
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
@@ -156,3 +162,4 @@ STATICFILES_DIRS = (
 )
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
+django_heroku.settings(locals())
