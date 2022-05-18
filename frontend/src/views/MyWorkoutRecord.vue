@@ -142,7 +142,7 @@ export default {
         } else {
           this.next = null;
         }
-        console.log(this.workoutrecords);
+        // console.log(this.workoutrecords);
       });
     },
     onSubmit() {

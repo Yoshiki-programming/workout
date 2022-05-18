@@ -57,7 +57,7 @@ export default {
   mounted() {
     this.getRecordData();
     this.setPageTitle();
-    console.log(this.record);
+    // console.log(this.record);
     // console.log(this.id);
   },
 };
