@@ -33,7 +33,7 @@ SECRET_KEY = 'django-insecure-h6i$ohe=23&1c&-f-^m=!desyx7_l^r=70^*=%fv)_b7oo$ukv
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    # "yoshi-workout-app.com",
+    "yoshi-workout-app.herokuapp.com",
     "*"
 ]
 
