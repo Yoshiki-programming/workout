@@ -1,1 +1,1 @@
-web: gunicorn workout_project.wsgi --log-file -
+wweb: python manage.py collectstatic --no-input; gunicorn workout_project.wsgi --log-file - --log-level debug
