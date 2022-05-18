@@ -76,7 +76,7 @@ export default {
   },
   created() {
     this.getRecordData();
-    console.log(this.record);
+    // console.log(this.record);
     // console.log(this.id);
   },
 };
