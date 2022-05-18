@@ -26,5 +26,4 @@ class OnlyYouMixin(UserPassesTestMixin):
         return user.pk == self.kwargs['pk'] or user.is_superuser
 
 class MypageView(TemplateView):
-    template_name = 'index.html'
-    
+    template_name = "index.html"

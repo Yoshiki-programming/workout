@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import datetime
 from pathlib import Path
+import turtle
 import dj_database_url
 from dotenv import (
     find_dotenv,
@@ -29,11 +30,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-h6i$ohe=23&1c&-f-^m=!desyx7_l^r=70^*=%fv)_b7oo$ukv'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = [
-    "127.0.0.1"
-]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -60,6 +59,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware', 
 ]
 
 ROOT_URLCONF = 'workout_project.urls'
@@ -151,4 +151,9 @@ WEBPACK_LOADER = {
 }
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static/'),
+)
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+
