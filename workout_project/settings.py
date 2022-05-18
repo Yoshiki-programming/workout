@@ -35,6 +35,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     "yoshi-workout-app.herokuapp.com",
+    "*"
 ]
 
 
