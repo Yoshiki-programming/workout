@@ -18,6 +18,7 @@ from dotenv import (
 )
 import os
 import django_heroku
+import logging
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -149,9 +150,10 @@ REST_FRAMEWORK = {
 WEBPACK_LOADER = {
     'DEFAULT': {
         'BUNDLE_DIR_NAME': 'dist/',
-        'STATS_FILE': os.path.join(BASE_DIR, 'frontend', 'webpack-stats.json')
+        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json')
     }
 }
+logging.info(BASE_DIR)
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
